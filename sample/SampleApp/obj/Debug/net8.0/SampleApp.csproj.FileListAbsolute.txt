@@ -116,7 +116,6 @@ D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\bin\De
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\bin\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.dll
-D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\bin\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.pdb
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.csproj.AssemblyReference.cache
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.GeneratedMSBuildEditorConfig.editorconfig
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.AssemblyInfoInputs.cache
@@ -129,3 +128,4 @@ D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\De
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.pdb
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.genruntimeconfig.cache
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\ref\SampleApp.dll
+D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\sample\SampleApp\obj\Debug\net8.0\SampleApp.sourcelink.json
