@@ -13,3 +13,4 @@ D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Release\net8.0\refi
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Release\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.pdb
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Release\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.genruntimeconfig.cache
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Release\net8.0\ref\Pgvector.EntityFrameworkCore.Scaffolding.dll
+D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Release\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.sourcelink.json

@@ -1,0 +1,23 @@
+# Build
+bin/
+obj/
+artifacts/
+
+# act local artifact storage
+act-artifacts/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+
+# OS
+.DS_Store
+Thumbs.db

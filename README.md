@@ -10,7 +10,7 @@
 Without this package, scaffolding a table with a `vector(1536)` column produces:
 
 ```csharp
-// ❌ What EF Core generates by default — broken
+// What EF Core generates by default — broken
 public partial class Product
 {
     public int Id { get; set; }
@@ -24,7 +24,7 @@ public partial class Product
 Install this package, and scaffolding correctly produces:
 
 ```csharp
-// ✅ What this package generates — correct
+// What this package generates — correct
 using Pgvector;
 
 public partial class Product
