@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Pgvector.EntityFrameworkCore.Scaffolding</RootNamespace>
+
+    <!-- NuGet Package Metadata -->
+    <PackageId>Pgvector.EntityFrameworkCore.Scaffolding</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Tom Blanchard</Authors>
+    <Description>Adds pgvector support to EF Core's Scaffold-DbContext / dotnet ef dbcontext scaffold. Automatically maps vector(N) columns to Pgvector.Vector, generates HNSW/IVFFlat index configuration, configures UseVector() in the scaffolded DbContext, and provides similarity search extension methods.</Description>
+    <PackageTags>efcore;pgvector;scaffold;postgresql;vector;embeddings;similarity-search;database-first</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Design-time package: only needed during scaffolding -->
+    <DevelopmentDependency>true</DevelopmentDependency>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="Pgvector" Version="0.3.2" />
+    <PackageReference Include="Pgvector.EntityFrameworkCore" Version="0.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>none</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Exclude sample project from main package compilation -->
+  <ItemGroup>
+    <Compile Remove="sample\**" />
+  </ItemGroup>
+
+</Project>

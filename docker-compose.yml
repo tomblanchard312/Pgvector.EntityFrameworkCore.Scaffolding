@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16-trixie
+    container_name: pgvector-scaffold-test
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: pgvector_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./sample/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U testuser -d pgvector_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

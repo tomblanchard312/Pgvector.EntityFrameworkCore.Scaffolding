@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Pgvector.EntityFrameworkCore.Scaffolding</id>
+    <version>1.0.0</version>
+    <authors>Tom Blanchard</authors>
+    <developmentDependency>true</developmentDependency>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</projectUrl>
+    <description>Adds pgvector support to EF Core's Scaffold-DbContext / dotnet ef dbcontext scaffold. Automatically maps vector(N) columns to Pgvector.Vector, generates HNSW/IVFFlat index configuration, configures UseVector() in the scaffolded DbContext, and provides similarity search extension methods.</description>
+    <tags>efcore pgvector scaffold postgresql vector embeddings similarity-search database-first</tags>
+    <repository type="git" url="https://github.com/tomblanchard312/pgvector-efcore-scaffold" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Microsoft.EntityFrameworkCore.Design" version="9.0.0" include="All" />
+        <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="9.0.1" exclude="Build,Analyzers" />
+        <dependency id="Pgvector" version="0.3.2" exclude="Build,Analyzers" />
+        <dependency id="Pgvector.EntityFrameworkCore" version="0.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\bin\Release\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.runtimeconfig.json" target="lib\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.runtimeconfig.json" />
+    <file src="D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\bin\Release\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.dll" target="lib\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.dll" />
+    <file src="D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\README.md" target="\README.md" />
+  </files>
+</package>
