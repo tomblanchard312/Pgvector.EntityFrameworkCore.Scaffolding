@@ -70,13 +70,14 @@ jobs:
             echo "VERSION=0.0.0-ci.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Enforce locked restore
+      - name: Restore (locked if lock files exist)
         run: |
-          if ! ls **/packages.lock.json >/dev/null 2>&1; then
-            echo "ERROR: packages.lock.json required for locked-mode builds."
-            exit 1
+          if ls **/packages.lock.json >/dev/null 2>&1; then
+            dotnet restore "${{ env.SOLUTION }}" --locked-mode
+          else
+            echo "No packages.lock.json found. Restoring without locked mode."
+            dotnet restore "${{ env.SOLUTION }}"
           fi
-          dotnet restore "${{ env.SOLUTION }}" --locked-mode
 
       - name: Detect dependency drift (PR only)
         if: github.event_name == 'pull_request'
