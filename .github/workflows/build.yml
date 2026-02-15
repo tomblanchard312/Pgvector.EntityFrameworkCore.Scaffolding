@@ -23,8 +23,8 @@ defaults:
 env:
   DOTNET_VERSION: "8.0.418"
   CONFIGURATION: "Release"
-  SOLUTION: "Pgvector.EntityFrameworkCore.Scaffolding.sln"
-  PROJECT: "Pgvector.EntityFrameworkCore.Scaffolding.csproj"
+  SOLUTION: "Pgvector.EntityFrameworkCore.Scaffolding.Extension.sln"
+  PROJECT: "Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj"
   ARTIFACT_DIR: "artifacts"
   DOTNET_CLI_TELEMETRY_OPTOUT: "1"
 
