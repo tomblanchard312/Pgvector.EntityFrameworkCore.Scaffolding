@@ -7,11 +7,15 @@
     <RootNamespace>Pgvector.EntityFrameworkCore.Scaffolding</RootNamespace>
 
     <!-- NuGet Package Metadata -->
-    <PackageId>Pgvector.EntityFrameworkCore.Scaffolding</PackageId>
+    <PackageId>Pgvector.EntityFrameworkCore.Scaffolding.Extension</PackageId>
     <Version>1.0.0</Version>
     <Authors>Tom Blanchard</Authors>
-    <Description>Adds pgvector support to EF Core's Scaffold-DbContext / dotnet ef dbcontext scaffold. Automatically maps vector(N) columns to Pgvector.Vector, generates HNSW/IVFFlat index configuration, configures UseVector() in the scaffolded DbContext, and provides similarity search extension methods.</Description>
-    <PackageTags>efcore;pgvector;scaffold;postgresql;vector;embeddings;similarity-search;database-first</PackageTags>
+    <Description>Adds pgvector support to EF Core 9's Scaffold-DbContext / dotnet ef dbcontext
+      scaffold. Automatically maps vector(N), halfvec(N), and sparsevec(N) columns to
+      Pgvector.Vector, HalfVector, and SparseVector types. Includes similarity search extension
+      methods and vector index management utilities.</Description>
+    <PackageTags>
+      efcore;pgvector;scaffold;postgresql;vector;embeddings;similarity-search;database-first</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</RepositoryUrl>
@@ -22,6 +26,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Pgvector" Version="0.3.2" />
     <PackageReference Include="Pgvector.EntityFrameworkCore" Version="0.3.0" />

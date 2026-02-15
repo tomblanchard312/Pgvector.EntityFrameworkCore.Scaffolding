@@ -34,22 +34,25 @@ Write-Host ""
 Write-Host "2. Running EF Core scaffolding (tests our package)..." -ForegroundColor Yellow
 $appsettingsPath = Join-Path $ProjectRoot "sample\SampleApp\appsettings.json"
 $connStr = (Get-Content $appsettingsPath | ConvertFrom-Json).ConnectionStrings.DefaultConnection
-Push-Location sample\SampleApp
+Push-Location sample
 try {
-    dotnet ef dbcontext scaffold $connStr Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Scaffolded --force --no-onconfiguring
+    .\run-scaffolding.ps1
     if ($LASTEXITCODE -ne 0) { exit 1 }
-} finally {
+}
+finally {
     Pop-Location
 }
 
 # 3. Verify scaffolded output has Vector (not byte[])
-$scaffoldedProduct = Get-Content "sample\SampleApp\Models\Scaffolded\Product.cs" -Raw
+$scaffoldedProduct = Get-Content "sample\SampleApp\Models\Product.cs" -Raw
 if ($scaffoldedProduct -match "Vector\?") {
     Write-Host "   Scaffolding SUCCESS: Product.Embedding is Vector? (correct)" -ForegroundColor Green
-} elseif ($scaffoldedProduct -match "byte\[\]") {
+}
+elseif ($scaffoldedProduct -match "byte\[\]") {
     Write-Host "   Scaffolding FAILED: Product.Embedding is byte[] (wrong - package not working)" -ForegroundColor Red
     exit 1
-} else {
+}
+else {
     Write-Host "   Could not verify scaffolded output." -ForegroundColor Yellow
 }
 Write-Host ""
@@ -60,7 +63,8 @@ Push-Location sample\SampleApp
 try {
     dotnet run
     if ($LASTEXITCODE -ne 0) { exit 1 }
-} finally {
+}
+finally {
     Pop-Location
 }
 

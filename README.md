@@ -1,9 +1,14 @@
 # Pgvector.EntityFrameworkCore.Scaffolding
 
-[![NuGet](https://img.shields.io/nuget/v/Pgvector.EntityFrameworkCore.Scaffolding.svg)](https://www.nuget.org/packages/Pgvector.EntityFrameworkCore.Scaffolding/)
+[![NuGet](https://img.shields.io/nuget/v/Pgvector.EntityFrameworkCore.Scaffolding.Extension.svg)](https://www.nuget.org/packages/Pgvector.EntityFrameworkCore.Scaffolding.Extension/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Fixes pgvector scaffolding in EF Core.** When you run `Scaffold-DbContext` or `dotnet ef dbcontext scaffold` against a PostgreSQL database with pgvector columns, EF Core maps them to `byte[]` instead of `Pgvector.Vector`. This package fixes that — and adds similarity search helpers, vector index management, and batch embedding operations.
+**Fixes pgvector scaffolding in EF Core.** When you run `Scaffold-DbContext` or `dotnet ef dbcontext scaffold` against a PostgreSQL database with pgvector columns, this package ensures:
+
+- Vector columns map to `Pgvector.Vector` (not `byte[]`)
+- Store types are preserved: `.HasColumnType("vector(1536)")`
+- Pgvector indexes are detected and annotated
+- `UseVector()` is injected into DbContext configuration
 
 ## The Problem
 
@@ -33,12 +38,24 @@ public partial class Product
     public string Name { get; set; }
     public Vector? Embedding { get; set; }  // Correctly mapped!
 }
+
+// DbContext automatically configured
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseNpgsql(connectionString, o => o.UseVector());
+}
+
+// Fluent API with preserved store types
+modelBuilder.Entity<Product>(entity =>
+{
+    entity.Property(e => e.Embedding).HasMaxLength(3);
+});
 ```
 
 ## Installation
 
 ```bash
-dotnet add package Pgvector.EntityFrameworkCore.Scaffolding
+dotnet add package Pgvector.EntityFrameworkCore.Scaffolding.Extension
 ```
 
 That's it. The package implements `IDesignTimeServices` which EF Core's tooling auto-discovers. No additional configuration is needed.
@@ -57,11 +74,11 @@ dotnet ef dbcontext scaffold "Host=localhost;Database=mydb;Username=myuser;Passw
 
 ### Supported pgvector Types
 
-| PostgreSQL Type | .NET Type | Example |
-|---|---|---|
-| `vector(N)` | `Pgvector.Vector` | `vector(1536)` |
-| `halfvec(N)` | `Pgvector.HalfVector` | `halfvec(768)` |
-| `sparsevec(N)` | `Pgvector.SparseVector` | `sparsevec(1536)` |
+| PostgreSQL Type | .NET Type               | Example           |
+| --------------- | ----------------------- | ----------------- |
+| `vector(N)`     | `Pgvector.Vector`       | `vector(1536)`    |
+| `halfvec(N)`    | `Pgvector.HalfVector`   | `halfvec(768)`    |
+| `sparsevec(N)`  | `Pgvector.SparseVector` | `sparsevec(1536)` |
 
 ## Similarity Search
 
@@ -265,13 +282,13 @@ dotnet run
 
 The sample uses `sample/SampleApp/appsettings.json`. Default for Docker:
 
-| Setting | Value |
-|---------|-------|
-| Host | localhost |
-| Port | 5433 (mapped from container's 5432) |
-| Database | pgvector_test |
-| User | testuser |
-| Password | testpass |
+| Setting  | Value                               |
+| -------- | ----------------------------------- |
+| Host     | localhost                           |
+| Port     | 5433 (mapped from container's 5432) |
+| Database | pgvector_test                       |
+| User     | testuser                            |
+| Password | testpass                            |
 
 ### What Gets Tested
 

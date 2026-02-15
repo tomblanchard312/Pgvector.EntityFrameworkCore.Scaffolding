@@ -12,9 +12,12 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tom Blanchard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute(@"Adds pgvector support to EF Core's Scaffold-DbContext / dotnet ef dbcontext scaffold. Automatically maps vector(N) columns to Pgvector.Vector, generates HNSW/IVFFlat index configuration, configures UseVector() in the scaffolded DbContext, and provides similarity search extension methods.")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute(@"Adds pgvector support to EF Core 9's Scaffold-DbContext / dotnet ef dbcontext
+      scaffold. Automatically maps vector(N), halfvec(N), and sparsevec(N) columns to
+      Pgvector.Vector, HalfVector, and SparseVector types. Includes similarity search extension
+      methods and vector index management utilities.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e71cff57673758dec7f087381f3e5c050751362")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec030d32c1086961cb199da0f9c8f1fc8641e36c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Pgvector.EntityFrameworkCore.Scaffolding")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Pgvector.EntityFrameworkCore.Scaffolding")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

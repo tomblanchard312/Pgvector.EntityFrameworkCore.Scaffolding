@@ -1,4 +1,4 @@
-# Test Pgvector.EntityFrameworkCore.Scaffolding as a NuGet package (not project reference)
+# Test Pgvector.EntityFrameworkCore.Scaffolding.Extension as a NuGet package (not project reference)
 # Prerequisites: Docker Desktop, dotnet ef tool
 
 $ErrorActionPreference = "Stop"
@@ -9,11 +9,11 @@ Write-Host "=== Pgvector Scaffolding Test (as NuGet Package) ===" -ForegroundCol
 Write-Host ""
 
 # 1. Pack the package
-Write-Host "1. Packing Pgvector.EntityFrameworkCore.Scaffolding..." -ForegroundColor Yellow
+Write-Host "1. Packing Pgvector.EntityFrameworkCore.Scaffolding.Extension..." -ForegroundColor Yellow
 $packOutput = Join-Path $ProjectRoot "bin\Release"
 New-Item -ItemType Directory -Path $packOutput -Force | Out-Null
 Push-Location $ProjectRoot
-dotnet pack Pgvector.EntityFrameworkCore.Scaffolding.csproj -c Release -o $packOutput
+dotnet pack Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj -c Release -o $packOutput
 $packResult = $LASTEXITCODE
 Pop-Location
 if ($packResult -ne 0) { exit 1 }
@@ -29,10 +29,11 @@ $backupPath = "$csprojPath.bak"
 
 # Replace ProjectReference with PackageReference
 $restoreProjectRef = $false
-$csprojPackage = $csproj -replace '<ProjectReference Include="\.\.\\\.\.\\Pgvector\.EntityFrameworkCore\.Scaffolding\.csproj" />', '<PackageReference Include="Pgvector.EntityFrameworkCore.Scaffolding" Version="1.0.0" />'
+$csprojPackage = $csproj -replace '<ProjectReference Include="\.\.\\\.\.\\Pgvector\.EntityFrameworkCore\.Scaffolding\.Extension\.csproj" />', '<PackageReference Include="Pgvector.EntityFrameworkCore.Scaffolding.Extension" Version="1.0.0" />'
 if ($csproj -eq $csprojPackage) {
     Write-Host "   SampleApp already uses PackageReference (or pattern changed)" -ForegroundColor Gray
-} else {
+}
+else {
     $csproj | Set-Content $backupPath -NoNewline
     $csprojPackage | Set-Content $csprojPath -NoNewline
     $restoreProjectRef = $true
@@ -40,58 +41,62 @@ if ($csproj -eq $csprojPackage) {
 Write-Host ""
 
 try {
-# 3. Start Docker
-Write-Host "2. Starting PostgreSQL (pgvector) in Docker..." -ForegroundColor Yellow
-docker compose -f (Join-Path $ProjectRoot "docker-compose.yml") up -d 2>$null
-Write-Host "   Waiting for database..."
-$maxAttempts = 30
-$attempt = 0
-do {
-    Start-Sleep -Seconds 2
-    $result = docker exec pgvector-scaffold-test pg_isready -U testuser -d pgvector_test 2>$null
-    if ($LASTEXITCODE -eq 0) { break }
-    $attempt++
-    if ($attempt -ge $maxAttempts) {
-        Write-Host "   Database failed to start." -ForegroundColor Red
-        throw "Database failed to start"
+    # 3. Start Docker
+    Write-Host "2. Starting PostgreSQL (pgvector) in Docker..." -ForegroundColor Yellow
+    docker compose -f (Join-Path $ProjectRoot "docker-compose.yml") up -d 2>$null
+    Write-Host "   Waiting for database..."
+    $maxAttempts = 30
+    $attempt = 0
+    do {
+        Start-Sleep -Seconds 2
+        $result = docker exec pgvector-scaffold-test pg_isready -U testuser -d pgvector_test 2>$null
+        if ($LASTEXITCODE -eq 0) { break }
+        $attempt++
+        if ($attempt -ge $maxAttempts) {
+            Write-Host "   Database failed to start." -ForegroundColor Red
+            throw "Database failed to start"
+        }
+    } while ($true)
+    Write-Host "   Database ready." -ForegroundColor Green
+    Write-Host ""
+
+    # 4. Restore and scaffold (package is used via nuget.config local source)
+    Write-Host "3. Restoring and running EF Core scaffolding..." -ForegroundColor Yellow
+    Push-Location sample\SampleApp
+    try {
+        dotnet restore --configfile nuget.config
+        $connStr = (Get-Content appsettings.json | ConvertFrom-Json).ConnectionStrings.DefaultConnection
+        dotnet ef dbcontext scaffold $connStr Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Scaffolded --force --no-onconfiguring
+        if ($LASTEXITCODE -ne 0) { throw "Scaffold failed" }
     }
-} while ($true)
-Write-Host "   Database ready." -ForegroundColor Green
-Write-Host ""
+    finally {
+        Pop-Location
+    }
 
-# 4. Restore and scaffold (package is used via nuget.config local source)
-Write-Host "3. Restoring and running EF Core scaffolding..." -ForegroundColor Yellow
-Push-Location sample\SampleApp
-try {
-    dotnet restore --configfile nuget.config
-    $connStr = (Get-Content appsettings.json | ConvertFrom-Json).ConnectionStrings.DefaultConnection
-    dotnet ef dbcontext scaffold $connStr Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Scaffolded --force --no-onconfiguring
-    if ($LASTEXITCODE -ne 0) { throw "Scaffold failed" }
-} finally {
-    Pop-Location
+    # 5. Verify scaffolded output
+    $scaffoldedProduct = Get-Content "sample\SampleApp\Models\Scaffolded\Product.cs" -Raw
+    if ($scaffoldedProduct -match "Vector\?") {
+        Write-Host "   Scaffolding SUCCESS: Product.Embedding is Vector? (correct)" -ForegroundColor Green
+    }
+    elseif ($scaffoldedProduct -match "byte\[\]") {
+        Write-Host "   Scaffolding FAILED: Product.Embedding is byte[] (wrong)" -ForegroundColor Red
+        throw "Scaffolding failed"
+    }
+    Write-Host ""
+
+    # 6. Run sample app
+    Write-Host "4. Running sample application..." -ForegroundColor Yellow
+    Push-Location sample\SampleApp
+    try {
+        dotnet run
+        if ($LASTEXITCODE -ne 0) { throw "Run failed" }
+    }
+    finally {
+        Pop-Location
+    }
+
 }
-
-# 5. Verify scaffolded output
-$scaffoldedProduct = Get-Content "sample\SampleApp\Models\Scaffolded\Product.cs" -Raw
-if ($scaffoldedProduct -match "Vector\?") {
-    Write-Host "   Scaffolding SUCCESS: Product.Embedding is Vector? (correct)" -ForegroundColor Green
-} elseif ($scaffoldedProduct -match "byte\[\]") {
-    Write-Host "   Scaffolding FAILED: Product.Embedding is byte[] (wrong)" -ForegroundColor Red
-    throw "Scaffolding failed"
-}
-Write-Host ""
-
-# 6. Run sample app
-Write-Host "4. Running sample application..." -ForegroundColor Yellow
-Push-Location sample\SampleApp
-try {
-    dotnet run
-    if ($LASTEXITCODE -ne 0) { throw "Run failed" }
-} finally {
-    Pop-Location
-}
-
-} finally {
+finally {
     # Always restore ProjectReference on exit (success or failure)
     if ($restoreProjectRef) {
         Write-Host ""

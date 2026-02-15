@@ -9,12 +9,17 @@
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
     <readme>README.md</readme>
     <projectUrl>https://github.com/tomblanchard312/pgvector-efcore-scaffold</projectUrl>
-    <description>Adds pgvector support to EF Core's Scaffold-DbContext / dotnet ef dbcontext scaffold. Automatically maps vector(N) columns to Pgvector.Vector, generates HNSW/IVFFlat index configuration, configures UseVector() in the scaffolded DbContext, and provides similarity search extension methods.</description>
+    <description>Adds pgvector support to EF Core 9's Scaffold-DbContext / dotnet ef dbcontext
+      scaffold. Automatically maps vector(N), halfvec(N), and sparsevec(N) columns to
+      Pgvector.Vector, HalfVector, and SparseVector types. Includes similarity search extension
+      methods and vector index management utilities.</description>
     <tags>efcore pgvector scaffold postgresql vector embeddings similarity-search database-first</tags>
-    <repository type="git" url="https://github.com/tomblanchard312/pgvector-efcore-scaffold" commit="5c6c27d695af1ef27f44d4393fd94f79f046f41f" />
+    <repository type="git" url="https://github.com/tomblanchard312/pgvector-efcore-scaffold" commit="ec030d32c1086961cb199da0f9c8f1fc8641e36c" />
     <dependencies>
       <group targetFramework="net8.0">
+        <dependency id="Microsoft.EntityFrameworkCore" version="9.0.1" exclude="Build,Analyzers" />
         <dependency id="Microsoft.EntityFrameworkCore.Design" version="9.0.0" include="All" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="9.0.1" exclude="Build,Analyzers" />
         <dependency id="Npgsql.EntityFrameworkCore.PostgreSQL" version="9.0.4" exclude="Build,Analyzers" />
         <dependency id="Pgvector" version="0.3.2" exclude="Build,Analyzers" />
         <dependency id="Pgvector.EntityFrameworkCore" version="0.3.0" exclude="Build,Analyzers" />

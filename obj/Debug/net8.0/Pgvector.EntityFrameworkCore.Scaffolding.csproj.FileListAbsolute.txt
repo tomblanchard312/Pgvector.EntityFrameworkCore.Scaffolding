@@ -8,6 +8,7 @@ D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvect
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.AssemblyInfo.cs
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.csproj.CoreCompileInputs.cache
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\EFCoreNpgsqlPgvector.cs
+D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.sourcelink.json
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.dll
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\refint\Pgvector.EntityFrameworkCore.Scaffolding.dll
 D:\source\repos\Pgvector.EntityFrameworkCore.Scaffolding\obj\Debug\net8.0\Pgvector.EntityFrameworkCore.Scaffolding.pdb

@@ -2960,7 +2960,9 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Microsoft.EntityFrameworkCore >= 9.0.1",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
+      "Microsoft.EntityFrameworkCore.Relational >= 9.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4",
       "Pgvector >= 0.3.2",
       "Pgvector.EntityFrameworkCore >= 0.3.0"
@@ -2973,9 +2975,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.csproj",
-      "projectName": "Pgvector.EntityFrameworkCore.Scaffolding",
-      "projectPath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.csproj",
+      "projectUniqueName": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj",
+      "projectName": "Pgvector.EntityFrameworkCore.Scaffolding.Extension",
+      "projectPath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj",
       "packagesPath": "C:\\Users\\wtblanch\\.nuget\\packages\\",
       "outputPath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\obj\\",
       "projectStyle": "PackageReference",
@@ -3017,10 +3019,18 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.1, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "suppressParent": "None",
             "target": "Package",
             "version": "[9.0.0, )"
+          },
+          "Microsoft.EntityFrameworkCore.Relational": {
+            "target": "Package",
+            "version": "[9.0.1, )"
           },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",

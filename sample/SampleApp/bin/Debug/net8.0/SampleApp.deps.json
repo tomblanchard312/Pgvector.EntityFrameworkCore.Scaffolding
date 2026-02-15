@@ -14,7 +14,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Pgvector": "0.3.2",
           "Pgvector.EntityFrameworkCore": "0.3.0",
-          "Pgvector.EntityFrameworkCore.Scaffolding": "1.0.0"
+          "Pgvector.EntityFrameworkCore.Scaffolding.Extension": "1.0.0"
         },
         "runtime": {
           "SampleApp.dll": {}
@@ -628,20 +628,6 @@
           }
         }
       },
-      "Pgvector.EntityFrameworkCore.Scaffolding/1.0.0": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "9.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
-          "Pgvector": "0.3.2",
-          "Pgvector.EntityFrameworkCore": "0.3.0"
-        },
-        "runtime": {
-          "lib/net8.0/Pgvector.EntityFrameworkCore.Scaffolding.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
       "System.CodeDom/6.0.0": {
         "runtime": {
           "lib/net6.0/System.CodeDom.dll": {
@@ -751,6 +737,22 @@
           "lib/net8.0/System.Text.Json.dll": {
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "9.0.925.41916"
+          }
+        }
+      },
+      "Pgvector.EntityFrameworkCore.Scaffolding.Extension/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.1",
+          "Microsoft.EntityFrameworkCore.Design": "9.0.0",
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "Pgvector": "0.3.2",
+          "Pgvector.EntityFrameworkCore": "0.3.0"
+        },
+        "runtime": {
+          "Pgvector.EntityFrameworkCore.Scaffolding.Extension.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -1000,13 +1002,6 @@
       "path": "pgvector.entityframeworkcore/0.3.0",
       "hashPath": "pgvector.entityframeworkcore.0.3.0.nupkg.sha512"
     },
-    "Pgvector.EntityFrameworkCore.Scaffolding/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-NDqH8IKSnw3dpP0TvJ8KIY9wa62/Q2xfc1j+D4XrvY2B9j6VA8K/iwlj/rRHUCXgiwn3j4MHXAOprFL1VEGoOw==",
-      "path": "pgvector.entityframeworkcore.scaffolding/1.0.0",
-      "hashPath": "pgvector.entityframeworkcore.scaffolding.1.0.0.nupkg.sha512"
-    },
     "System.CodeDom/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1083,6 +1078,11 @@
       "sha512": "sha512-NEnpppwq67fRz/OvQRxsEMgetDJsxlxpEsAFO/4PZYbAyAMd4Ol6KS7phc8uDoKPsnbdzRLKobpX303uQwCqdg==",
       "path": "system.text.json/9.0.9",
       "hashPath": "system.text.json.9.0.9.nupkg.sha512"
+    },
+    "Pgvector.EntityFrameworkCore.Scaffolding.Extension/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

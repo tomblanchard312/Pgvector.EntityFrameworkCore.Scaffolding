@@ -865,25 +865,6 @@
           "build/net8.0/Pgvector.EntityFrameworkCore.targets": {}
         }
       },
-      "Pgvector.EntityFrameworkCore.Scaffolding/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "9.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.1",
-          "Pgvector": "0.3.2",
-          "Pgvector.EntityFrameworkCore": "0.3.0"
-        },
-        "compile": {
-          "lib/net8.0/Pgvector.EntityFrameworkCore.Scaffolding.dll": {
-            "related": ".runtimeconfig.json"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Pgvector.EntityFrameworkCore.Scaffolding.dll": {
-            "related": ".runtimeconfig.json"
-          }
-        }
-      },
       "System.CodeDom/6.0.0": {
         "type": "package",
         "compile": {
@@ -1156,6 +1137,24 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Pgvector.EntityFrameworkCore.Scaffolding.Extension/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.1",
+          "Microsoft.EntityFrameworkCore.Design": "9.0.0",
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+          "Pgvector": "0.3.2",
+          "Pgvector.EntityFrameworkCore": "0.3.0"
+        },
+        "compile": {
+          "bin/placeholder/Pgvector.EntityFrameworkCore.Scaffolding.Extension.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Pgvector.EntityFrameworkCore.Scaffolding.Extension.dll": {}
         }
       }
     }
@@ -2863,19 +2862,6 @@
         "pgvector.entityframeworkcore.nuspec"
       ]
     },
-    "Pgvector.EntityFrameworkCore.Scaffolding/1.0.0": {
-      "sha512": "NDqH8IKSnw3dpP0TvJ8KIY9wa62/Q2xfc1j+D4XrvY2B9j6VA8K/iwlj/rRHUCXgiwn3j4MHXAOprFL1VEGoOw==",
-      "type": "package",
-      "path": "pgvector.entityframeworkcore.scaffolding/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        "README.md",
-        "lib/net8.0/Pgvector.EntityFrameworkCore.Scaffolding.dll",
-        "lib/net8.0/Pgvector.EntityFrameworkCore.Scaffolding.runtimeconfig.json",
-        "pgvector.entityframeworkcore.scaffolding.1.0.0.nupkg.sha512",
-        "pgvector.entityframeworkcore.scaffolding.nuspec"
-      ]
-    },
     "System.CodeDom/6.0.0": {
       "sha512": "CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
       "type": "package",
@@ -3328,6 +3314,11 @@
         "system.threading.channels.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Pgvector.EntityFrameworkCore.Scaffolding.Extension/1.0.0": {
+      "type": "project",
+      "path": "../../Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj",
+      "msbuildProject": "../../Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3338,7 +3329,7 @@
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.4",
       "Pgvector >= 0.3.2",
       "Pgvector.EntityFrameworkCore >= 0.3.0",
-      "Pgvector.EntityFrameworkCore.Scaffolding >= 1.0.0"
+      "Pgvector.EntityFrameworkCore.Scaffolding.Extension >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3375,7 +3366,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj": {
+              "projectPath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -3419,10 +3414,6 @@
           "Pgvector.EntityFrameworkCore": {
             "target": "Package",
             "version": "[0.3.0, )"
-          },
-          "Pgvector.EntityFrameworkCore.Scaffolding": {
-            "target": "Package",
-            "version": "[1.0.0, )"
           }
         },
         "imports": [

@@ -20,18 +20,52 @@ docker compose up -d
 .\sample\run-test.ps1
 ```
 
-Or run manually:
+Or run scaffolding manually:
 
 ```powershell
-# 1. Start database
+# Start database
 docker compose up -d
 
-# 2. Scaffold (pass connection string; run-test.ps1 reads from appsettings.json)
+# Run scaffolding with pgvector support
+cd sample
+.\run-scaffolding.ps1
+
+# Or manually:
 cd sample\SampleApp
 dotnet ef dbcontext scaffold "Host=localhost;Port=5433;Database=pgvector_test;Username=testuser;Password=testpass" Npgsql.EntityFrameworkCore.PostgreSQL -o Models/Scaffolded --force --no-onconfiguring
+```
 
-# 3. Run the sample app (uses appsettings.json)
-dotnet run
+## What the Scaffolding Does
+
+With the Pgvector.EntityFrameworkCore.Scaffolding package installed, `dotnet ef dbcontext scaffold` will:
+
+- Map `vector(N)` columns to `Pgvector.Vector` (not `byte[]`)
+- Preserve vector dimensions: `.HasMaxLength(N)`
+- Add index annotations for pgvector indexes (hnsw, ivfflat)
+- Inject `UseVector()` into the DbContext OnConfiguring method
+
+Generated code will include:
+
+```csharp
+// Model
+public partial class Document
+{
+    public int Id { get; set; }
+    public Pgvector.Vector? Embedding { get; set; }  // Correctly mapped
+}
+
+// DbContext
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+    optionsBuilder.UseNpgsql(connectionString, o => o.UseVector());  // Auto-injected
+}
+
+// Fluent API
+modelBuilder.Entity<Document>(entity =>
+{
+    entity.Property(e => e.Embedding).HasMaxLength(3);  // Dimension preserved
+    entity.HasIndex(e => e.Embedding).HasMethod("hnsw").HasOperators("vector_cosine_ops");  // Index metadata
+});
 ```
 
 ## Connection String

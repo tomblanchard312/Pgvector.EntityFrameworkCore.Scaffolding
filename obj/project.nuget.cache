@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lnn8rG0G18M=",
+  "dgSpecHash": "AqXERtfRfCg=",
   "success": true,
-  "projectFilePath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.csproj",
+  "projectFilePath": "D:\\source\\repos\\Pgvector.EntityFrameworkCore.Scaffolding\\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wtblanch\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\wtblanch\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

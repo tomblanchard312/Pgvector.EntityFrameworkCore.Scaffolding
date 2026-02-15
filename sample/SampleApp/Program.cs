@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Pgvector;
 using Pgvector.EntityFrameworkCore;
-using SampleApp.Models.Scaffolded;
+using SampleApp.Models;
 
 // Connection string from project's appsettings.json (same as Entity Framework)
 var configuration = new ConfigurationBuilder()
@@ -15,12 +15,12 @@ var connectionString = configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException(
         "Connection string 'DefaultConnection' not found. Add it to appsettings.json or set ConnectionStrings__DefaultConnection env var.");
 
-await using var ctx = new PgvectorTestContext(
-    new DbContextOptionsBuilder<PgvectorTestContext>()
+Console.WriteLine("=== Pgvector Scaffolding Test ===\n");
+
+await using var ctx = new SampleDbContext(
+    new DbContextOptionsBuilder<SampleDbContext>()
         .UseNpgsql(connectionString, o => o.UseVector())
         .Options);
-
-Console.WriteLine("=== Pgvector Scaffolding Test ===\n");
 
 // Test 1: Verify scaffolded Product has Vector? (not byte[])
 var productType = typeof(Product);

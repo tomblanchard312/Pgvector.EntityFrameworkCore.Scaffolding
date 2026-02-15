@@ -12,9 +12,10 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <ProjectReference Include="..\..\Pgvector.EntityFrameworkCore.Scaffolding.csproj" />
+    <ProjectReference Include="..\..\Pgvector.EntityFrameworkCore.Scaffolding.Extension.csproj" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
+      Version="9.0.9" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Pgvector" Version="0.3.2" />
     <PackageReference Include="Pgvector.EntityFrameworkCore" Version="0.3.0" />
